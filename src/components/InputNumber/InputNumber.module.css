@@ -1,0 +1,82 @@
+.inputNumber {
+    color: #646478;
+}
+
+.inputNumber__field {
+    position: relative;
+}
+
+.inputNumber__label {
+    position: absolute;
+    top: calc(50% - 16px / 2);
+    left: 16px;
+    z-index: -1;
+    transition: 0.3s;
+}
+
+.inputNumber__input {
+    box-sizing: border-box;
+    padding: 28px 16px 14px;
+    width: 100%;
+    height: 60px;
+    font-size: 16px;
+    color: #646478;
+    border: 1px solid #f7f7f8;
+    border-radius: 2px;
+    background-color: transparent;
+    outline: none;
+}
+
+.inputNumber__input_error {
+    border-color: #e70e02;;
+}
+
+.inputNumber__valueAndCurrency {
+    position: absolute;
+    top: 28px;
+    left: 17px;
+    z-index: -1;
+
+    font-family: sans-serif;
+}
+
+.inputNumber__value {
+    color: transparent;
+}
+
+.inputNumber__errorAndHelp {
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.inputNumber__error {
+    margin-right: 16px;
+    color: #e70e02;
+}
+
+.inputNumber__help {
+    text-align: right;
+    color: #9393A1;
+}
+
+.inputNumber__input:focus ~ .inputNumber__label,
+.inputNumber__input:not(:placeholder-shown) ~ .inputNumber__label {
+    top: 8px;
+    font-size: 12px;
+}
+
+.inputNumber__input:disabled {
+    color: #fff;
+    background-color: #bfbbba;
+}
+
+.inputNumber__input:disabled ~ .inputNumber__label,
+.inputNumber__input:disabled ~ .inputNumber__valueAndCurrency {
+    z-index: 0;
+}
+
+.inputNumber__input:disabled ~ .inputNumber__valueAndCurrency {
+    color: #fff;
+}
