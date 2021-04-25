@@ -12,6 +12,29 @@ export default function App() {
         value={value}
         priceStep={6}
         currency="₽"
+        onChange={setValue}
+      />
+      <InputNumber
+        label="Сумма"
+        value={value}
+        priceStep={6}
+        currency="₽"
+        disabled
+        onChange={setValue}
+      />
+      <InputNumber
+        label="Сумма"
+        value={value}
+        priceStep={6}
+        currency="₽"
+        help="Значение суммы имеет информационный характер"
+        onChange={setValue}
+      />
+      <InputNumber
+        label="Сумма"
+        value={value}
+        priceStep={6}
+        currency="₽"
         error="Введенное значение не должно быть равно 0"
         help="Значение суммы имеет информационный характер"
         onChange={setValue}
