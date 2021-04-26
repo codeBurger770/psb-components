@@ -14,10 +14,6 @@ interface IInputNumberProps {
     onChange(value?: number): void;
 }
 
-// TODO: Имеются следующие проблемы
-// parseFloat('999999999999.88888') === 999999999999.8889
-// parseFloat('999999999999.99999') === 1000000000000
-// parseFloat('123456789012.12345') === 123456789012.12344
 export const InputNumber = (props: IInputNumberProps) => {
     const { value, priceStep, onChange } = props;
     const [inputValue, setInputValue] = useState('');
@@ -41,6 +37,10 @@ export const InputNumber = (props: IInputNumberProps) => {
     const onChangeInputValue = useCallback(e => {
         if (new RegExp(`^\\d{0,12}([\\.,]\\d{0,${priceStep ?? 2}})?$`).test(e.target.value)) {
             setInputValue(e.target.value.replace('.', ','));
+            // TODO: Имеются следующие проблемы
+            // parseFloat('999999999999.88888') === 999999999999.8889
+            // parseFloat('999999999999.99999') === 1000000000000
+            // parseFloat('123456789012.12345') === 123456789012.12344
             const newValue = parseFloat(e.target.value.replace(',', '.'));
             onChange(isNaN(newValue) ? undefined : newValue);
         }
