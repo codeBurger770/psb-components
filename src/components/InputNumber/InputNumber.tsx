@@ -12,16 +12,17 @@ interface IInputNumberProps {
     help?: string;
     disabled?: boolean;
     onChange(value?: number): void;
+    onBlur?(): void;
 }
 
 export const InputNumber = (props: IInputNumberProps) => {
-    const { value, priceStep, onChange } = props;
+    const { value, priceStep = 2, onChange, onBlur } = props;
     const [inputValue, setInputValue] = useState('');
     const [inputValueFormatted, setInputValueFormatted] = useState('');
     const [isFocus, setFocus] = useState(false);
 
     useEffect(() => {
-        setInputValue(value ? value.toString().replace('.', ',') : '');
+        setInputValue(value === undefined ? '' : value.toString().replace('.', ','));
     }, [value]);
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export const InputNumber = (props: IInputNumberProps) => {
     }, [inputValue, isFocus]);
 
     const onChangeInputValue = useCallback(e => {
-        if (new RegExp(`^\\d{0,12}([\\.,]\\d{0,${priceStep ?? 2}})?$`).test(e.target.value)) {
+        if (new RegExp(`^\\d{0,12}${priceStep ? `([\\.,]\\d{0,${priceStep}})?` : ''}$`).test(e.target.value)) {
             setInputValue(e.target.value.replace('.', ','));
             // TODO: Имеются следующие проблемы
             // parseFloat('999999999999.88888') === 999999999999.8889
@@ -46,8 +47,12 @@ export const InputNumber = (props: IInputNumberProps) => {
         }
     }, [priceStep, onChange]);
 
-    const onFocus = useCallback(() => setFocus(true), []);
-    const onBlur = useCallback(() => setFocus(false), []);
+    const onFocusInputValue = useCallback(() => setFocus(true), []);
+
+    const onBlurInputValue = useCallback(() => {
+        setFocus(false);
+        onBlur?.();
+    }, [onBlur]);
 
     return (
         <div className={`${styles.inputNumber} ${props.className ?? ''}`} style={props.style}>
@@ -57,8 +62,8 @@ export const InputNumber = (props: IInputNumberProps) => {
                     placeholder=" "
                     value={isFocus ? inputValue : inputValueFormatted}
                     onChange={onChangeInputValue}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
+                    onFocus={onFocusInputValue}
+                    onBlur={onBlurInputValue}
                     disabled={props.disabled}
                 />
                 <label className={styles.inputNumber__label}>{props.label}</label>
