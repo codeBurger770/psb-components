@@ -6,7 +6,7 @@ interface IInputNumberProps {
     style?: CSSProperties;
     label: string;
     value?: number;
-    priceStep?: number;
+    precision?: number;
     currency?: string;
     error?: string;
     help?: string;
@@ -16,7 +16,7 @@ interface IInputNumberProps {
 }
 
 export const InputNumber = (props: IInputNumberProps) => {
-    const { value, priceStep = 2, onChange, onBlur } = props;
+    const { value, precision = 2, onChange, onBlur } = props;
     const [inputValue, setInputValue] = useState('');
     const [inputValueFormatted, setInputValueFormatted] = useState('');
     const [isFocus, setFocus] = useState(false);
@@ -36,7 +36,7 @@ export const InputNumber = (props: IInputNumberProps) => {
     }, [inputValue, isFocus]);
 
     const onChangeInputValue = useCallback(e => {
-        if (new RegExp(`^\\d{0,12}${priceStep ? `([\\.,]\\d{0,${priceStep}})?` : ''}$`).test(e.target.value)) {
+        if (new RegExp(`^\\d{0,12}${precision ? `([\\.,]\\d{0,${precision}})?` : ''}$`).test(e.target.value)) {
             setInputValue(e.target.value.replace('.', ','));
             // TODO: Имеются следующие проблемы
             // parseFloat('999999999999.88888') === 999999999999.8889
@@ -45,7 +45,7 @@ export const InputNumber = (props: IInputNumberProps) => {
             const newValue = parseFloat(e.target.value.replace(',', '.'));
             onChange(isNaN(newValue) ? undefined : newValue);
         }
-    }, [priceStep, onChange]);
+    }, [precision, onChange]);
 
     const onFocusInputValue = useCallback(() => setFocus(true), []);
 

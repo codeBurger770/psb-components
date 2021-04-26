@@ -9,7 +9,7 @@ className?: string;
 style?: CSSProperties;
 label: string;
 value?: number;
-priceStep?: number;
+precision?: number;
 currency?: string;
 error?: string;
 help?: string;
@@ -27,7 +27,7 @@ return (
     <InputNumber
         label="Сумма"
         value={value}
-        priceStep={6}
+        precision={6}
         currency="₽"
         onChange={setValue}
     />
@@ -44,7 +44,7 @@ return (
     <InputNumber
         label="Сумма"
         value={value}
-        priceStep={6}
+        precision={6}
         currency="₽"
         disabled
         onChange={setValue}
@@ -62,7 +62,7 @@ return (
     <InputNumber
         label="Сумма"
         value={value}
-        priceStep={6}
+        precision={6}
         currency="₽"
         help="Значение суммы имеет информационный характер"
         onChange={setValue}
@@ -80,7 +80,7 @@ return (
     <InputNumber
         label="Сумма"
         value={value}
-        priceStep={6}
+        precision={6}
         currency="₽"
         error="Введенное значение не должно быть равно 0"
         help="Значение суммы имеет информационный характер"
@@ -99,7 +99,7 @@ return (
     <InputNumber
         label="Сумма"
         value={value}
-        priceStep={6}
+        precision={6}
         currency="₽"
         error="Введенное значение не должно быть равно 0"
         help="Значение суммы имеет информационный характер"
