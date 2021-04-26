@@ -15,6 +15,7 @@ error?: string;
 help?: string;
 disabled?: boolean;
 onChange(value?: number): void;
+onBlur?(): void;
 ```
 
 ### Использование:
